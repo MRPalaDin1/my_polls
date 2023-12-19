@@ -1,0 +1,17 @@
+{% extends 'layout/basic.html' %}
+
+{% load static %}
+
+{% block title %} Правка личных данных {% endblock %}
+
+{% block content %}
+   <h2>Правка личных данных пользователя {{ user.username }}</h2>
+   <form method="post" enctype="multipart/form-data">
+       {% csrf_token %}
+       {{form.as_p}}
+       {% if user.avatar %}
+       <img src="{{ user.avatar.url }}" alt="Аватар отсутствует" width="200px">
+       {% endif %}
+       <input type="submit" value="Изменить">
+   </form>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'layout/basic.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% for message in messages %}
+<div class="text-red alert alert-{{ message.tags }}">
+    {{ message }}
+</div>
+{% endfor %}
+
+{% for poll in polls %}
+<h2>{{ poll.title }}</h2>
+<p>{{ poll.short_description }}</p>
+<p>{{ poll.publish_date }}</p>
+
+<ul>
+    {% for choice in poll.choice_set.all %}
+        <li>{{ choice.choice_text }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'app:results' poll.id %}">View Results</a>
+<a href="{% url 'app:detail' poll.id %}">Vote Now</a>
+
+{% endfor %}
+
+{% endblock %}

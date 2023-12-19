@@ -1,0 +1,16 @@
+{% extends 'layout/basic.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>{{ poll.title }}</h1>
+
+<ul>
+    {% for choice, percentage in choices_with_percentages %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{choice.votes|pluralize}} ({{percentage}}%)</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'app:index' %}">На главную</a>
+
+{% endblock %}
